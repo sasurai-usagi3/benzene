@@ -1,15 +1,15 @@
 window.addEventListener('load', () => {
   const benzenElm = document.getElementById('js-benzen');
-  const benzen = new Benzen();
+  const benzen = new Benzen(benzenElm);
 
   benzen.move(60, 60);
   benzen.scale(20, 20);
-
-  benzenElm.setAttribute('transform', benzen.toString());
+  benzen.update();
 });
 
 class Benzen {
-  constructor() {
+  constructor(element) {
+    this._element = element;
     this._matrix = new Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1);
   }
 
@@ -31,8 +31,7 @@ class Benzen {
     this._matrix = this._matrix.multiply(matrix);
   }
 
-  // TODO: 一時的に作成しているので後で消す
-  toString() {
+  update() {
     const transformMatrix = [];
 
     for(let c = 0; c < 3; ++c) {
@@ -40,7 +39,9 @@ class Benzen {
       transformMatrix.push(this._matrix.getElement(1, c));
     }
 
-    return `matrix(${transformMatrix.join(', ')})`;
+    const transformAttrValue = `matrix(${transformMatrix.join(', ')})`;
+
+    this._element.setAttribute('transform', transformAttrValue);
   }
 }
 
