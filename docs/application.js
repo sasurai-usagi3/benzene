@@ -1,7 +1,11 @@
 window.addEventListener('load', () => {
-  const benzen = document.getElementById('js-benzen');
+  const benzenElm = document.getElementById('js-benzen');
+  const benzen = new Benzen();
 
-  benzen.setAttribute('transform', 'translate(60, 60) scale(20, 20)');
+  benzen.move(60, 60);
+  benzen.scale(20, 20);
+
+  benzenElm.setAttribute('transform', benzen.toString());
 });
 
 class Benzen {
