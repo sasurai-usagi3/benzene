@@ -4,6 +4,42 @@ window.addEventListener('load', () => {
   benzen.setAttribute('transform', 'translate(60, 60) scale(20, 20)');
 });
 
+class Benzen {
+  constructor() {
+    this._matrix = new Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1);
+  }
+
+  reset() {
+    this._matrix = new Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1);
+  }
+
+  // NOTE: 指定された座標分移動するメソッド
+  move(x, y) {
+    const matrix = new Matrix(1, 0, x, 0, 1, y, 0, 0, 1);
+
+    this._matrix = this._matrix.multiply(matrix);
+  }
+
+  // NOTE: 拡大縮小するメソッド
+  scale(sx, sy) {
+    const matrix = new Matrix(sx, 0, 0, 0, sy, 0, 0, 0, 1);
+
+    this._matrix = this._matrix.multiply(matrix);
+  }
+
+  // TODO: 一時的に作成しているので後で消す
+  toString() {
+    const transformMatrix = [];
+
+    for(let c = 0; c < 3; ++c) {
+      transformMatrix.push(this._matrix.getElement(0, c));
+      transformMatrix.push(this._matrix.getElement(1, c));
+    }
+
+    return `matrix(${transformMatrix.join(', ')})`;
+  }
+}
+
 class Matrix {
   constructor(a, b, c, d, e, f, g, h, i) {
     this._array = [a, b, c, d, e, f, g, h, i];
