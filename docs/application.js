@@ -1,10 +1,16 @@
 window.addEventListener('load', () => {
   const benzenElm = document.getElementById('js-benzen');
   const benzen = new Benzen(benzenElm);
+  let a = 0;
 
-  benzen.move(60, 60);
-  benzen.scale(20, 20);
-  benzen.update();
+  setInterval(() => {
+    a = ((a >= 360) ? (a - 360) : a) + 1;
+    benzen.reset();
+    benzen.move(150, 75);
+    benzen.rotate(a);
+    benzen.scale(50, 50);
+    benzen.update();
+  }, 10);
 });
 
 class Benzen {
