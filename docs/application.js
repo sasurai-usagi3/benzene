@@ -1,10 +1,16 @@
 window.addEventListener('load', () => {
   const benzenElm = document.getElementById('js-benzen');
   const benzen = new Benzen(benzenElm);
+  let a = 0;
 
-  benzen.move(60, 60);
-  benzen.scale(20, 20);
-  benzen.update();
+  setInterval(() => {
+    a = ((a >= 360) ? (a - 360) : a) + 1;
+    benzen.reset();
+    benzen.move(150, 75);
+    benzen.rotate(a);
+    benzen.scale(50, 50);
+    benzen.update();
+  }, 10);
 });
 
 class Benzen {
@@ -27,6 +33,14 @@ class Benzen {
   // NOTE: 拡大縮小するメソッド
   scale(sx, sy) {
     const matrix = new Matrix(sx, 0, 0, 0, sy, 0, 0, 0, 1);
+
+    this._matrix = this._matrix.multiply(matrix);
+  }
+
+  // NOTE: 回転させるメソッド
+  rotate(a) {
+    const rad = a * Math.PI / 180;
+    const matrix = new Matrix(Math.cos(rad), -Math.sin(rad), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1);
 
     this._matrix = this._matrix.multiply(matrix);
   }
