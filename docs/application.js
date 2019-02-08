@@ -31,6 +31,14 @@ class Benzen {
     this._matrix = this._matrix.multiply(matrix);
   }
 
+  // NOTE: 回転させるメソッド
+  rotate(a) {
+    const rad = a * Math.PI / 180;
+    const matrix = new Matrix(Math.cos(rad), -Math.sin(rad), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1);
+
+    this._matrix = this._matrix.multiply(matrix);
+  }
+
   update() {
     const transformMatrix = [];
 
