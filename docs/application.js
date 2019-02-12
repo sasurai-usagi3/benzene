@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
   let a = 0;
 
   setInterval(() => {
-    a = ((a >= 360) ? (a - 360) : a) + 1;
+    a = (a + 1) % 360;
     benzen.reset();
     benzen.move(150, 75);
     benzen.rotate(a);
