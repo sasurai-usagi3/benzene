@@ -1,6 +1,7 @@
 window.addEventListener('load', () => {
-  const benzenElm = document.getElementById('js-benzen');
-  const benzen = new Benzen(benzenElm);
+  const benzenOmittedElm = document.getElementById('js-benzen--omitted');
+  const benzenSpecifiedElm = document.getElementById('js-benzen--specified');
+  const benzen = new Benzen(benzenOmittedElm, benzenSpecifiedElm);
   let a = 0;
 
   setInterval(() => {
@@ -10,13 +11,21 @@ window.addEventListener('load', () => {
     benzen.rotate(a);
     benzen.scale(50, 50);
     benzen.update();
+
+    if(a === 0) {
+      benzen.change();
+    }
   }, 10);
 });
 
 class Benzen {
-  constructor(element) {
-    this._element = element;
+  constructor(omittedElement, specifiedElement) {
+    this._element = omittedElement;
+    this._hiddenElement = specifiedElement;
     this._matrix = new Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1);
+
+    this._element.classList.remove('is-hidden');
+    this._hiddenElement.classList.add('is-hidden');
   }
 
   reset() {
@@ -43,6 +52,15 @@ class Benzen {
     const matrix = new Matrix(Math.cos(rad), -Math.sin(rad), 0, Math.sin(rad), Math.cos(rad), 0, 0, 0, 1);
 
     this._matrix = this._matrix.multiply(matrix);
+  }
+
+  change() {
+    const tmp = this._element;
+    this._element = this._hiddenElement;
+    this._hiddenElement = tmp;
+
+    this._element.classList.remove('is-hidden');
+    this._hiddenElement.classList.add('is-hidden');
   }
 
   update() {
