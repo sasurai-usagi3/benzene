@@ -5,9 +5,9 @@ window.addEventListener('load', () => {
   let a = 0;
 
   setInterval(() => {
-    a = ((a >= 360) ? (a - 360) : a) + 1;
+    a = (a + 1) % 360;
     benzen.reset();
-    benzen.move(150, 75);
+    benzen.move(300, 150);
     benzen.rotate(a);
     benzen.scale(50, 50);
     benzen.update();
@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
     if(a === 0) {
       benzen.change();
     }
-  }, 10);
+  }, 5);
 });
 
 class Benzen {
