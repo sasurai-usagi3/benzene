@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
   setInterval(() => {
     a = (a + 1) % 360;
     benzen.reset();
-    benzen.move(150, 75);
+    benzen.move(300, 150);
     benzen.rotate(a);
     benzen.scale(50, 50);
     benzen.update();
