@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
     if(a === 0) {
       benzen.change();
     }
-  }, 10);
+  }, 5);
 });
 
 class Benzen {
