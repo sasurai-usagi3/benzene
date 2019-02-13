@@ -1,13 +1,15 @@
 window.addEventListener('load', () => {
   const benzenOmittedElm = document.getElementById('js-benzen--omitted');
   const benzenSpecifiedElm = document.getElementById('js-benzen--specified');
+  const loadingSentenceElm = document.getElementById('js-loading-sentence');
   const benzen = new Benzen(benzenOmittedElm, benzenSpecifiedElm);
-  let a = 0;
+  const loadingSentence = 'Loading...'
+  let a = 0, showLengthOfLoadingSentence = 0;
 
   setInterval(() => {
     a = (a + 1) % 360;
     benzen.reset();
-    benzen.move(300, 150);
+    benzen.move(110, 150);
     benzen.rotate(a);
     benzen.scale(50, 50);
     benzen.update();
@@ -16,6 +18,12 @@ window.addEventListener('load', () => {
       benzen.change();
     }
   }, 5);
+
+  setInterval(() => {
+    showLengthOfLoadingSentence = (showLengthOfLoadingSentence + 1) % 11;
+
+    loadingSentenceElm.textContent = loadingSentence.slice(0, showLengthOfLoadingSentence);
+  }, 150);
 });
 
 class Benzen {
