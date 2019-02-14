@@ -1,21 +1,21 @@
 window.addEventListener('load', () => {
-  const benzenOmittedElm = document.getElementById('js-benzen--omitted');
-  const benzenSpecifiedElm = document.getElementById('js-benzen--specified');
+  const benzeneOmittedElm = document.getElementById('js-benzene--omitted');
+  const benzeneSpecifiedElm = document.getElementById('js-benzene--specified');
   const loadingSentenceElm = document.getElementById('js-loading-sentence');
-  const benzen = new Benzen(benzenOmittedElm, benzenSpecifiedElm);
+  const benzene = new Benzene(benzeneOmittedElm, benzeneSpecifiedElm);
   const loadingSentence = 'Loading...'
   let a = 0, showLengthOfLoadingSentence = 0;
 
   setInterval(() => {
     a = (a + 1) % 360;
-    benzen.reset();
-    benzen.move(110, 150);
-    benzen.rotate(a);
-    benzen.scale(50, 50);
-    benzen.update();
+    benzene.reset();
+    benzene.move(110, 150);
+    benzene.rotate(a);
+    benzene.scale(50, 50);
+    benzene.update();
 
     if(a === 0) {
-      benzen.change();
+      benzene.change();
     }
   }, 5);
 
@@ -26,7 +26,7 @@ window.addEventListener('load', () => {
   }, 150);
 });
 
-class Benzen {
+class Benzene {
   constructor(omittedElement, specifiedElement) {
     this._element = omittedElement;
     this._hiddenElement = specifiedElement;
